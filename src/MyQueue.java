@@ -6,8 +6,8 @@
 /**
  * TODO
  *
- * @author TODO
- * @since TODO
+ * @author Kevin Chen
+ * @since 2/4/24
  */
 
 public class MyQueue<T> implements MyQueueInterface<T> {
