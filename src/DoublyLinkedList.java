@@ -14,8 +14,8 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
 
     /* DLL instance variables */
     private int nelems;
-    private Node head;
-    private Node tail;
+    public Node head; //change back to private!! and for tail
+    public Node tail;
 
     /**
      * Node for chaining together to create a linked list
@@ -161,8 +161,8 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
             lastNode.next = newNode;
             tail.prev = newNode;
             //tail = newNode;
-            nelems++;
         }
+        nelems++;
         return true;
     }
 
@@ -170,8 +170,12 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
     /**
      * Adds an element to a certain index in the list, shifting exist elements
      * create room. Does not accept null values.
-     *
      * TODO: Javadoc comments
+     * Add an element to the end of the list
+     * @param index the position where element will be added
+     * @param element data to be added
+     * @throws IndexOutOfBoundsException if index is outside the range [0, size]
+     * @throws NullPointerException if data received is null
      */
     @Override
     public void add(int index, T element)
@@ -219,8 +223,8 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
 
     /**
      * Determine if the list contains the data element anywhere in the list.
-     *
      * TODO: Javadoc comments
+     * @param element is checked if it appears in the list at least once
      */
     @Override
     public boolean contains(Object element) {
@@ -238,7 +242,8 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
 
     /**
      * Retrieves the element stored with a given index on the list.
-     *
+     * @param index the position of the node's data being accessed
+     * @throws IndexOutOfBoundsException if index is outside the range [0, size]
      * TODO: Javadoc comments
      */
     @Override
@@ -261,7 +266,7 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
 
     /**
      * Helper method to get the Nth node in our list
-     *
+     * @param index the position of the node's data being accessed
      * TODO: Javadoc comments
      */
     private Node getNth(int index) {
@@ -280,7 +285,7 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
 
     /**
      * Determine if the list empty
-     *
+     * @return true if the list is empty, else false
      * TODO: javadoc comments
      */
     @Override
@@ -295,7 +300,8 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
 
     /**
      * Remove the element from position index in the list
-     *
+     * @param index the position of the element to be removed
+     * @throws IndexOutOfBoundsException if index is outside the range [0, size - 1]
      * TODO: javadoc comments
      */
     @Override
@@ -305,18 +311,24 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
         }
         Node node = head.next;
         if (index == 0) {
+            T val;
+            val = head.next.data;
             Node sucNode = node.next;
             sucNode.prev = head;
             head.next = sucNode;
+            return val;
         } else {
             int i = 1;
             node = head.next.next;
             while (node != null) {
                 if (i == index) {
+                    T val;
+                    val = node.data;
                     Node sucNode = node.next;
                     Node prevNode = node.prev;
                     sucNode.prev = prevNode;
                     prevNode.next = sucNode;
+                    return val;
                 }
                 node = node.next;
                 i ++;
@@ -329,7 +341,10 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
 
     /**
      * Set the value of an element at a certain index in the list.
-     *
+     * @param index the position of the element's that's data is to be altered
+     * @param element new data to alter old data
+     * @throws IndexOutOfBoundsException if index is outside the range [0, size-1]
+     * @throws NullPointerException if data received is null
      * TODO: javadoc comments
      */
     @Override
@@ -347,7 +362,7 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
 
     /**
      * Retrieves the amount of elements that are currently on the list.
-     *
+     * @return number of elements in list
      * TODO: javadoc comments
      */
     @Override
@@ -359,7 +374,7 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
     /**
      * String representation of this list in the form of:
      * "[(head) -> elem1 -> elem2 -> ... -> elemN -> (tail)]"
-     *
+     * @return a String that shows the list and elements are represented in String format
      * TODO: javadoc comments
      */
     @Override
@@ -367,16 +382,19 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
         if ((head.next == null) && (tail.prev == null)) {
             return "[(head) -> (tail)]";
         }
-        String result = "[(head) -> ";
+        StringBuilder result = new StringBuilder("[(head) -> ");
         Node node = head.next;
         while (node != null) {
             if (node.next == null) {
-                result = result + "(tail)]";
+                result.append("(tail)]");
+            } else {
+                String elem = String.valueOf(node.data);
+                result.append(elem).append(" -> ");
+
             }
-            String elem = String.valueOf(node.data);
-            result = result + elem + " -> ";
+            node = node.next;
         }
-        return result;
+        return result.toString();
     }
 
     /* ==================== EXTRA CREDIT ==================== */
