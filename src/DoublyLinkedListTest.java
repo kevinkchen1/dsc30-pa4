@@ -75,9 +75,9 @@ class DoublyLinkedListTest {
         doublyLinkedList.add(5);
         doublyLinkedList.add(10);
         doublyLinkedList.add(15);
+        assertEquals(15, doublyLinkedList.remove(2));
         assertEquals(5, doublyLinkedList.remove(0));
         assertEquals(10, doublyLinkedList.remove(0));
-        assertEquals(15, doublyLinkedList.remove(0));
 
     }
 

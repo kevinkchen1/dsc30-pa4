@@ -152,14 +152,19 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
             Node newNode = new Node(element);
             head.next = newNode;
             tail.prev = newNode;
-            newNode.next = tail;
-            newNode.prev = head;
+            newNode.setNext(tail);
+            newNode.setPrev(head);
+            //newNode.next = tail;
+            //newNode.prev = head;
+
         } else {
             Node lastNode = tail.prev;
             Node newNode = new Node(element, tail, lastNode);
-
-            lastNode.next = newNode;
-            tail.prev = newNode;
+            lastNode.setNext(newNode);
+            tail.setPrev(newNode);
+            newNode.setNext(tail);
+            //lastNode.next = newNode;
+            //tail.prev = newNode;
             //tail = newNode;
         }
         nelems++;
@@ -185,31 +190,34 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
         if ((index < 0) || (index > nelems)) {
             throw new IndexOutOfBoundsException("index is outside the range [0, size]");
         }
-        if (element == null){
+        if (element == null) {
             throw new NullPointerException("data is null");
         }
-        if (index == 0){
+        if (index == 0) {
             Node newNode = new Node(element, head.next, head);
             head.next = newNode;
         } else {
-            Node node = head.next;
-            int i = 1;
-            while (node != null){
-                if (i == index){
+            Node node = head.next; //.next
+            int i = 1; // 0
+            while (node != null) {
+                if (i == index) {
                     Node sucNode = node.next;
                     Node newNode = new Node(element, sucNode, node);
-                    node.next = newNode;
-                    sucNode.prev = newNode;
+                    node.setNext(newNode);
+                    sucNode.setPrev(newNode);
+                    //node.next = newNode;
+                    //sucNode.prev = newNode;
                 }
-                i ++;
+                i++;
                 node = node.next;
             }
 
+            //}
+            ;
+
         }
-        nelems ++;
-
+        nelems++;
     }
-
     /**
      * Clear the linked list
      */
@@ -250,8 +258,12 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
     public T get(int index) throws IndexOutOfBoundsException {
         // TODO: Fill in implementation to get the node at index
         if ((index < 0) && (index > nelems - 1)) {
-            throw new IndexOutOfBoundsException(" index is outside the range [0, size - 1]");
+            throw new IndexOutOfBoundsException("index is outside the range [0, size - 1]");
         }
+        if (nelems <= 0){
+            throw new IndexOutOfBoundsException("getting index of empty list");
+        }
+
         Node node = head.next;
         int i = 0;
         while (node != null) {
@@ -307,15 +319,20 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
     @Override
     public T remove(int index) throws IndexOutOfBoundsException {
         if ((index < 0) && (index > nelems - 1)) {
-            throw new IndexOutOfBoundsException(" index is outside the range [0, size - 1]");
+            throw new IndexOutOfBoundsException("index is outside the range [0, size - 1]");
+        }
+        if (nelems <= 0){
+            throw new IndexOutOfBoundsException("cannot remove from empty list");
         }
         Node node = head.next;
         if (index == 0) {
             T val;
             val = head.next.data;
-            Node sucNode = node.next;
-            sucNode.prev = head;
-            head.next = sucNode;
+            node.remove();
+            //Node sucNode = node.next;
+            //sucNode.prev = head;
+            //head.next = sucNode;
+            nelems --;
             return val;
         } else {
             int i = 1;
@@ -324,17 +341,18 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
                 if (i == index) {
                     T val;
                     val = node.data;
-                    Node sucNode = node.next;
-                    Node prevNode = node.prev;
-                    sucNode.prev = prevNode;
-                    prevNode.next = sucNode;
+                    //Node sucNode = node.next;
+                    //Node prevNode = node.prev;
+                    //sucNode.prev = prevNode;
+                    //prevNode.next = sucNode;
+                    node.remove();
+                    nelems --;
                     return val;
                 }
                 node = node.next;
                 i ++;
             }
         }
-        nelems --;
         // TODO: Fill in implementation
         return null;
     }
