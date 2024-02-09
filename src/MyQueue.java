@@ -42,7 +42,7 @@ public class MyQueue<T> implements MyQueueInterface<T> {
 
     public T dequeue() {
         // TODO
-        int last_ind = queue.size() - 1;
+        //int lastInd = queue.size() - 1;
         return (T) queue.remove(0);
     }
 

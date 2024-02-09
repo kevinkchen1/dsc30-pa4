@@ -29,6 +29,7 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
 
         /**
          * Constructor to create singleton Node
+         * @param element is a value of a generic data type, which can be any value
          */
         private Node(T element) {
             // TODO: complete constructor
@@ -63,6 +64,7 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
 
         /**
          * Accessor to get the Nodes Element
+         * @return the data value of generic type T in the node
          */
         public T getElement() {
             // TODO: complete implementation
@@ -241,6 +243,7 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
      * Determine if the list contains the data element anywhere in the list.
      * TODO: Javadoc comments
      * @param element is checked if it appears in the list at least once
+     * @return boolean, true if the element is in the list, else false
      */
     @Override
     public boolean contains(Object element) {
@@ -260,6 +263,7 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
      * Retrieves the element stored with a given index on the list.
      * @param index the position of the node's data being accessed
      * @throws IndexOutOfBoundsException if index is outside the range [0, size]
+     * @return data value of generic type of the node at specified index
      * TODO: Javadoc comments
      */
     @Override
@@ -287,6 +291,7 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
     /**
      * Helper method to get the Nth node in our list
      * @param index the position of the node's data being accessed
+     * @return
      * TODO: Javadoc comments
      */
     private Node getNth(int index) {
@@ -322,6 +327,7 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
      * Remove the element from position index in the list
      * @param index the position of the element to be removed
      * @throws IndexOutOfBoundsException if index is outside the range [0, size - 1]
+     * @return data value of generic type which is the data of the node being removed
      * TODO: javadoc comments
      */
     @Override
@@ -371,6 +377,7 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
      * @param element new data to alter old data
      * @throws IndexOutOfBoundsException if index is outside the range [0, size-1]
      * @throws NullPointerException if data received is null
+     * @return original data value of generic type that was in the node that's element's was changed.
      * TODO: javadoc comments
      */
     @Override

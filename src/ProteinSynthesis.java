@@ -60,7 +60,7 @@ class ProteinSynthesis {
                 ind = 0;
             }
         }
-        if ((ind == 3)) {
+        if ((ind == DIVISIBLE_BY_THREE)) {
             translated.enqueue(CodonMap.getAminoAcid("AUG"));
         }
         while (rna.size() > 0) {
