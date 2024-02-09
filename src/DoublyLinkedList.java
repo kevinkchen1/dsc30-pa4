@@ -446,20 +446,68 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
 
     /**
      * Remove nodes whose index is a multiple of base
-     *
+     * @param base is an integer where elements in the list that are multiples of base are removed
      * TODO: javadoc comments
      */
-    public void removeMultipleOf(int base) {
-        // TODO: complete implementation       
+    public void removeMultipleOf(int base) throws IllegalArgumentException{
+        // TODO: complete implementation
+        if (base < 1) {
+            throw new IllegalArgumentException("base is less than 1");
+        }
+        Node node = head.next;
+
+        while (node != null && node.data != null) {
+            int val = (int) node.data;
+            if (val % base == 0) {
+                Node sucNode = node.getNext();
+                Node prevNode = node.getPrev();
+                sucNode.setPrev(prevNode);
+                prevNode.setNext(sucNode);
+                nelems --;
+            }
+            node = node.next;
+        }
     }
 
     /**
      * Swap the nodes between index [0, splitIndex] of two lists
-     *
+     * @param other is another linked list who's segement will be swapped.
+     * @param splitIndex is the index up to where the two linked lists will be swapped.
      * TODO: javadoc comments
      */
     public void swapSegment(DoublyLinkedList<T> other, int splitIndex) {
         // TODO: complete implementation
+        Node node1 = head.next;
+        Node node2 = other.head.next;
+
+        int ind = 0;
+        DoublyLinkedList copy = new DoublyLinkedList<>();
+        DoublyLinkedList temp1 = new DoublyLinkedList<>();
+        DoublyLinkedList temp2 = new DoublyLinkedList<>();
+        while (ind <= splitIndex) {
+            temp1.add(node1.data);
+            temp2.add(node2.data);
+            Node sucNode = node1.getNext();
+            Node prevNode = node1.getPrev();
+            sucNode.setPrev(prevNode);
+            prevNode.setNext(sucNode);
+            Node sucNode2 = node2.getNext();
+            Node prevNode2 = node2.getPrev();
+            sucNode.setPrev(prevNode2);
+            prevNode.setNext(sucNode2);
+            node1 = node1.next;
+            node2 = node2.next;
+            ind ++;
+        }
+        while (!temp1.isEmpty()) {
+            T val1 = (T) temp1.remove(temp1.size()-1);
+            other.add(0, val1);
+            T val2 = (T) temp2.remove(temp2.size()-1);
+            add(0, val2);
+        }
+
+
+
     }
 
 }

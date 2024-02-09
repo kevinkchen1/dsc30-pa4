@@ -149,11 +149,41 @@ class DoublyLinkedListTest {
         assertEquals("[(head) -> 10 -> (tail)]", doublyLinkedList.toString());
     }
 
-    //@Test
-    //public void removeMultipleOfTest() {
-    //}
+    @Test
+    public void removeMultipleOfTest() {
+        doublyLinkedList.add(5);
+        doublyLinkedList.add(6);
+        doublyLinkedList.add(17);
+        doublyLinkedList.removeMultipleOf(3);
+        assertEquals(2, doublyLinkedList.size());
+        assertEquals(5, doublyLinkedList.get(0));
+        assertEquals(17, doublyLinkedList.get(1));
+        doublyLinkedList.add(4);
+        doublyLinkedList.add(8);
+        doublyLinkedList.add(10);
+        doublyLinkedList.removeMultipleOf(4);
+        assertEquals(3, doublyLinkedList.size());
+        assertEquals(10, doublyLinkedList.get(2));
+        Assertions.assertThrows(IllegalArgumentException.class,() -> {
+            doublyLinkedList.removeMultipleOf(-1);
+        });
 
-    //@Test
-    //public void swapSegmentTest() {
-    //}
+    }
+
+    @Test
+    public void swapSegmentTest() {
+        DoublyLinkedList other = new DoublyLinkedList<>();
+        doublyLinkedList.add(5);
+        doublyLinkedList.add(6);
+        doublyLinkedList.add(17);
+        doublyLinkedList.add(18);
+        other.add(1);
+        other.add(2);
+        other.add(3);
+        other.add(4);
+        doublyLinkedList.swapSegment(other, 2);
+
+
+
+    }
 }
