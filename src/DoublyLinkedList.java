@@ -447,6 +447,7 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
     /**
      * Remove nodes whose index is a multiple of base
      * @param base is an integer where elements in the list that are multiples of base are removed
+     * @throws IllegalArgumentException
      * TODO: javadoc comments
      */
     public void removeMultipleOf(int base) throws IllegalArgumentException{
