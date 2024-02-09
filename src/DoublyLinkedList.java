@@ -377,7 +377,7 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
      * @param element new data to alter old data
      * @throws IndexOutOfBoundsException if index is outside the range [0, size-1]
      * @throws NullPointerException if data received is null
-     * @return original data value of generic type that was in the node that's element's was changed.
+     * @return original data value of the node who's element's was changed.
      * TODO: javadoc comments
      */
     @Override
