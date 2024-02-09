@@ -21,6 +21,9 @@ class DoublyLinkedListTest {
         Assertions.assertThrows(NullPointerException.class,() -> {
             doublyLinkedList.add(null);
         });
+        Assertions.assertThrows(IndexOutOfBoundsException.class,() -> {
+            doublyLinkedList.add(3, 1);
+        });
         doublyLinkedList.add(1, 20);
         assertEquals(20, doublyLinkedList.head.next.next.data);
         assertEquals(5, doublyLinkedList.head.next.data);
@@ -57,6 +60,12 @@ class DoublyLinkedListTest {
         assertEquals(5, doublyLinkedList.get(0));
         assertEquals(10,doublyLinkedList.get(1));
         assertEquals(15,doublyLinkedList.get(2));
+        Assertions.assertThrows(IndexOutOfBoundsException.class,() -> {
+            doublyLinkedList.get(3);
+        });
+        Assertions.assertThrows(IndexOutOfBoundsException.class,() -> {
+            doublyLinkedList.get(-1);
+        });
 
     }
 
@@ -78,6 +87,13 @@ class DoublyLinkedListTest {
         assertEquals(15, doublyLinkedList.remove(2));
         assertEquals(5, doublyLinkedList.remove(0));
         assertEquals(10, doublyLinkedList.remove(0));
+        Assertions.assertThrows(IndexOutOfBoundsException.class,() -> {
+            doublyLinkedList.remove(-1);
+        });
+        Assertions.assertThrows(IndexOutOfBoundsException.class,() -> {
+            doublyLinkedList.add(1);
+            doublyLinkedList.remove(1);
+        });
 
     }
 
@@ -87,9 +103,24 @@ class DoublyLinkedListTest {
         doublyLinkedList.add(10);
         doublyLinkedList.add(15);
         doublyLinkedList.set(0, 4);
-        assertEquals(5, doublyLinkedList.get(0));
-        assertEquals(5, doublyLinkedList.get(0));
-        assertEquals(5, doublyLinkedList.get(0));
+        assertEquals(4, doublyLinkedList.get(0));
+        assertEquals(10, doublyLinkedList.get(1));
+        doublyLinkedList.set(1,11);
+        assertEquals(11, doublyLinkedList.get(1));
+        assertEquals(15, doublyLinkedList.set(2, 12));
+        assertEquals(12, doublyLinkedList.get(2));
+        Assertions.assertThrows(IndexOutOfBoundsException.class,() -> {
+            doublyLinkedList.set(-1,8);
+
+        });
+        Assertions.assertThrows(IndexOutOfBoundsException.class,() -> {
+            doublyLinkedList.set(3,8);
+        });
+        Assertions.assertThrows(NullPointerException.class,() -> {
+            doublyLinkedList.set(0,null);
+        });
+
+
 
     }
 

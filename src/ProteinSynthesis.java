@@ -12,7 +12,14 @@
 class ProteinSynthesis {
 
     private static final int DIVISIBLE_BY_THREE = 3;
-
+    /**
+     * The method transcribeDNA transcribes a string of DNA represented by characters A,T,G,C
+     * into mRNA in the form of a charQueue object by replacing all the T's with U's.
+     * @param dna is a string of characters A,T,G,C which represent a sequence of nucleotides.
+     * @return a CharQueue object which represents the mRNA with each nucleotide as a char
+     * in the queue.
+     * @throws IllegalArgumentException if the length of the string dna is not divisible by 3
+     */
     public MyQueue<Character> transcribeDNA(String dna) {
         // TODO
         if (dna.length() % DIVISIBLE_BY_THREE != 0) {
@@ -29,63 +36,46 @@ class ProteinSynthesis {
         //return null;
     }
 
+    /**
+     * The method translateRNA translates an RNA as a CharQueue object with characters A,U,G,C
+     * into a protein sequence based on the RNA. It will start transcription when start codon is
+     * present and ends when stop codon is reached. It maps the codons to an amino acid that's
+     * added to the protein sequence.
+     * @param rna is a CharQueue object of characters which represent a sequence of nucleotides.
+     * @return a CharQueue object which has the protein sequence from the given mRNA with each
+     * character as an amino acid abbreviation.
+     */
     public MyQueue<Character> translateRNA(MyQueue<Character> rna) {
         // TODO
         MyQueue translated = new MyQueue();
-        boolean start = false;
-        while (rna.size() > 0) {
-            //if (!start){
-            char[] targets = {'A', 'U', 'G'};
-            int ind = 0;
-            while (ind < DIVISIBLE_BY_THREE) {
-                if (targets[ind] == rna.peek()) {
-                    ind++;
-                    rna.dequeue();
-                } else {
-                    rna.dequeue();
-                    ind = 0;
-                }
+        //boolean start = false;
+        char[] targets = {'A', 'U', 'G'};
+        int ind = 0;
+        while ((ind < DIVISIBLE_BY_THREE) && (!rna.isEmpty())) {
+            if (targets[ind] == rna.peek()) {
+                ind++;
+                rna.dequeue();
+            } else {
+                rna.dequeue();
+                ind = 0;
             }
-            //if (char1 == 'A' && char2 == 'U' && char3 == 'G'){
-            char aminoAcid = CodonMap.getAminoAcid("AUG");
-            translated.enqueue(aminoAcid);
-            //start = true;
-            //for (int i = 0; i < DIVISIBLE_BY_THREE; i++) {
-            //rna.dequeue();
+        }
+        if ((ind == 3)) {
+            translated.enqueue(CodonMap.getAminoAcid("AUG"));
+        }
+        while (rna.size() > 0) {
 
-            //} else {
-            //rna.dequeue();
-            //}
-            //}
-
-            //if (start) {
             char char1 = rna.dequeue();
             char char2 = rna.dequeue();
             char char3 = rna.dequeue();
             String group = "" + char1 + char2 + char3;
-            aminoAcid = CodonMap.getAminoAcid(group);
+            char aminoAcid = CodonMap.getAminoAcid(group);
             translated.enqueue(aminoAcid);
             if (aminoAcid == '*') {
                 break;
             }
         }
         return translated;
-        //}
-        //}
-        //if (translated.size() > 0){
-        //MyQueue newTranslated = new CharQueue();
-        //while (!translated.isEmpty()){
-        //newTranslated.enqueue(translated.dequeue());
-        //}
-        //return newTranslated;
-        //} else {
-        //CharQueue newTranslated = new CharQueue(1);
-        //return newTranslated;
-        //}
-
-        //}
-        //return null;
-        //}
 
     }
 }

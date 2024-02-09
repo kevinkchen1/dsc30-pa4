@@ -193,6 +193,14 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
         if (element == null) {
             throw new NullPointerException("data is null");
         }
+        if (head.next == null && tail.next == null){
+            Node newNode = new Node(element);
+            head.next = newNode;
+            tail.prev = newNode;
+            newNode.setNext(tail);
+            newNode.setPrev(head);
+        }
+
         if (index == 0) {
             Node newNode = new Node(element, head.next, head);
             head.next = newNode;
@@ -257,7 +265,7 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
     @Override
     public T get(int index) throws IndexOutOfBoundsException {
         // TODO: Fill in implementation to get the node at index
-        if ((index < 0) && (index > nelems - 1)) {
+        if ((index < 0) || (index > nelems - 1)) {
             throw new IndexOutOfBoundsException("index is outside the range [0, size - 1]");
         }
         if (nelems <= 0){
@@ -318,7 +326,7 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
      */
     @Override
     public T remove(int index) throws IndexOutOfBoundsException {
-        if ((index < 0) && (index > nelems - 1)) {
+        if ((index < 0) || (index > nelems - 1)) {
             throw new IndexOutOfBoundsException("index is outside the range [0, size - 1]");
         }
         if (nelems <= 0){
@@ -368,11 +376,23 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
     @Override
     public T set(int index, T element)
             throws IndexOutOfBoundsException, NullPointerException {
-        if ((index < 0) && (index > nelems - 1)) {
+        if ((index < 0) || (index > nelems - 1)) {
             throw new IndexOutOfBoundsException(" index is outside the range [0, size - 1]");
         }
         if (element == null) {
             throw new NullPointerException("data received is null");
+        }
+        Node node = head.next;
+        int ind = 0;
+        while (node != null) {
+            if (ind == index) {
+                T val = node.data;
+                node.setElement(element);
+                return val;
+            }
+            ind ++;
+            node = node.next;
+
         }
         // TODO: Fill in implmentation
         return null;
