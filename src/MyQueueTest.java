@@ -53,6 +53,7 @@ class MyQueueTest {
 
     @Test
     public void dequeueTest() {
+        assertNull(queue1.dequeue());
         queue2.enqueue('a');
         queue1.enqueue('o');
         queue1.enqueue('l');
@@ -71,6 +72,7 @@ class MyQueueTest {
 
     @Test
     public void peekTest() {
+        queue1.dequeue();
         queue2.enqueue('a');
         queue1.enqueue('o');
         queue1.enqueue('l');

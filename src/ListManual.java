@@ -21,12 +21,12 @@ public class ListManual {
         answers.add("r = h;");
         answers.add("t = h.next;");
         answers.add("h.elem = t.elem;");
-        answers.add("head.elem = head.next.next.elem;");
-        answers.add("head.next.next.next = head");
-        answers.add("head.next = head.next.next;");
-        answers.add("while ((p!=null) && (r.elem != 'M')) {r = r.next}");  //put your statements in one line, follow the column Structures
+        answers.add("h.elem = h.next.next.elem;");
+        answers.add("h.next.next.next = h");
+        answers.add("h.next = h.next.next;");
+        answers.add("while ((r != null) && (r.elem != 'M')) {r = r.next}");  //put your statements in one line, follow the column Structures
         answers.add("h = new Node('A', null); h.next = new Node('B', null); h.next.next = new Node('C', null); h.next.next.next = new Node('D', null)");  //put your statements in one line, follow the column Structures
-        answers.add("head.next.next.next = new Node('D', null");
+        answers.add("head.next.next.next = new Node('D', null)");
         return answers;
     }
 }

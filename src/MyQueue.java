@@ -59,6 +59,10 @@ public class MyQueue<T> implements MyQueueInterface<T> {
      */
     public T dequeue() {
         // TODO
+        if (size() <= 0){
+            return null;
+        }
+
         //int lastInd = queue.size() - 1;
         return (T) queue.remove(0);
     }
