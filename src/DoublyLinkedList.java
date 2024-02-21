@@ -120,8 +120,8 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
             // TODO: complete implementation
             prev.next = next;
             next.prev = prev;
-            prev = null;
-            next = null;
+            //prev = null;
+            //next = null;
 
         }
     }
@@ -456,16 +456,17 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
             throw new IllegalArgumentException("base is less than 1");
         }
         Node node = head.next;
-
+        int count = 0;
         while (node != null && node.data != null) {
-            int val = (int) node.data;
-            if (val % base == 0) {
+            //int val = (int) node.data;
+            if (count % base == 0) {
                 Node sucNode = node.getNext();
                 Node prevNode = node.getPrev();
                 sucNode.setPrev(prevNode);
                 prevNode.setNext(sucNode);
                 nelems --;
             }
+            count ++;
             node = node.next;
         }
     }
@@ -482,22 +483,30 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
         Node node2 = other.head.next;
 
         int ind = 0;
-        DoublyLinkedList copy = new DoublyLinkedList<>();
-        DoublyLinkedList temp1 = new DoublyLinkedList<>();
-        DoublyLinkedList temp2 = new DoublyLinkedList<>();
+        DoublyLinkedList<Object> copy = new DoublyLinkedList<>();
+        DoublyLinkedList<Object> temp1 = new DoublyLinkedList<>();
+        DoublyLinkedList<Object> temp2 = new DoublyLinkedList<>();
         while (ind <= splitIndex) {
             temp1.add(node1.data);
             temp2.add(node2.data);
+            Node node1temp = node1.next;
+            Node node2temp = node2.next;
+            node1.remove();
+            node2.remove();
+            nelems --;
+            other.nelems --;
+            /*
             Node sucNode = node1.getNext();
             Node prevNode = node1.getPrev();
             sucNode.setPrev(prevNode);
             prevNode.setNext(sucNode);
             Node sucNode2 = node2.getNext();
             Node prevNode2 = node2.getPrev();
-            sucNode.setPrev(prevNode2);
-            prevNode.setNext(sucNode2);
-            node1 = node1.next;
-            node2 = node2.next;
+            sucNode2.setPrev(prevNode2);
+            prevNode2.setNext(sucNode2);
+            */
+            node1 = node1temp;
+            node2 = node2temp;
             ind ++;
         }
         while (!temp1.isEmpty()) {

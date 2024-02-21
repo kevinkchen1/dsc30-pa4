@@ -72,6 +72,9 @@ public class MyQueue<T> implements MyQueueInterface<T> {
      */
     public T peek() {
         // TODO
+        if (size() <= 0){
+            return null;
+        }
         return (T) queue.get(0);
     }
 

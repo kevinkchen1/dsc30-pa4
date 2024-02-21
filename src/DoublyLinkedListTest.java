@@ -156,23 +156,25 @@ class DoublyLinkedListTest {
         doublyLinkedList.add(17);
         doublyLinkedList.removeMultipleOf(3);
         assertEquals(2, doublyLinkedList.size());
-        assertEquals(5, doublyLinkedList.get(0));
+        assertEquals(6, doublyLinkedList.get(0));
         assertEquals(17, doublyLinkedList.get(1));
         doublyLinkedList.add(4);
         doublyLinkedList.add(8);
         doublyLinkedList.add(10);
-        doublyLinkedList.removeMultipleOf(4);
-        assertEquals(3, doublyLinkedList.size());
-        assertEquals(10, doublyLinkedList.get(2));
+        doublyLinkedList.removeMultipleOf(2);
+        assertEquals(2, doublyLinkedList.size());
+        assertEquals(17, doublyLinkedList.get(0));
+        assertEquals(8, doublyLinkedList.get(1));
         Assertions.assertThrows(IllegalArgumentException.class,() -> {
             doublyLinkedList.removeMultipleOf(-1);
         });
+
 
     }
 
     @Test
     public void swapSegmentTest() {
-        DoublyLinkedList other = new DoublyLinkedList<>();
+        DoublyLinkedList<Object> other = new DoublyLinkedList<>();
         doublyLinkedList.add(5);
         doublyLinkedList.add(6);
         doublyLinkedList.add(17);
@@ -182,6 +184,21 @@ class DoublyLinkedListTest {
         other.add(3);
         other.add(4);
         doublyLinkedList.swapSegment(other, 2);
+        assertEquals(1, doublyLinkedList.get(0));
+        assertEquals(2, doublyLinkedList.get(1));
+        assertEquals(3, doublyLinkedList.get(2));
+        assertEquals(18, doublyLinkedList.get(3));
+        Assertions.assertThrows(IndexOutOfBoundsException.class,() -> {
+            doublyLinkedList.get(4);
+        });
+        assertEquals(5, other.get(0));
+        assertEquals(6, other.get(1));
+        assertEquals(17, other.get(2));
+        assertEquals(4, other.get(3));
+        Assertions.assertThrows(IndexOutOfBoundsException.class,() -> {
+            other.get(5);
+        });
+
 
 
 
