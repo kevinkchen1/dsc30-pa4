@@ -30,6 +30,8 @@ class ProteinSynthesisTest {
             MyQueue proteins2 = translator.translateRNA(rna4);
         });
 
+
+
     }
 
     @Test
@@ -54,6 +56,9 @@ class ProteinSynthesisTest {
         System.out.println(transformString(translator.translateRNA(rna4)));
         rna4 = translator.transcribeDNA("ATGATCTCGTGAATC");
         System.out.println(transformString(translator.translateRNA(rna4)));
+        MyQueue rna5 = translator.transcribeDNA("UAAATGATCTCGTAA");
+
+        assertEquals("MIS*", transformString(translator.translateRNA(rna5)));
 
     }
 }
