@@ -22,6 +22,7 @@ class ProteinSynthesis {
      */
     public MyQueue<Character> transcribeDNA(String dna) {
         // TODO
+        int len = dna.length();
         if (dna.length() % DIVISIBLE_BY_THREE != 0) {
             throw new IllegalArgumentException();
         }
@@ -49,7 +50,7 @@ class ProteinSynthesis {
         // TODO
         MyQueue translated = new MyQueue();
         //boolean start = false;
-        char[] targets = {'A', 'U', 'G'};
+        /*char[] targets = {'A', 'U', 'G'};
         int ind = 0;
         while ((ind < DIVISIBLE_BY_THREE) && (!rna.isEmpty())) {
             if (targets[ind] == rna.peek()) {
@@ -63,17 +64,34 @@ class ProteinSynthesis {
         if ((ind == DIVISIBLE_BY_THREE)) {
             translated.enqueue(CodonMap.getAminoAcid("AUG"));
         }
+        */
+
         while (rna.size() > 0) {
 
             char char1 = rna.dequeue();
             char char2 = rna.dequeue();
             char char3 = rna.dequeue();
             String group = "" + char1 + char2 + char3;
-            char aminoAcid = CodonMap.getAminoAcid(group);
-            translated.enqueue(aminoAcid);
-            if (aminoAcid == '*') {
+            if (group.equals("AUG")) {
+                translated.enqueue(CodonMap.getAminoAcid(group));
+                while (rna.size() > 0) {
+                    char1 = rna.dequeue();
+                    char2 = rna.dequeue();
+                    char3 = rna.dequeue();
+                    group = "" + char1 + char2 + char3;
+                    char aminoAcid = CodonMap.getAminoAcid(group);
+                    translated.enqueue(aminoAcid);
+                    if (aminoAcid == '*') {
+                        break;
+                    }
+
+                }
                 break;
             }
+
+
+            //translated.enqueue(aminoAcid);
+
         }
         return translated;
 

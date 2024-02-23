@@ -36,6 +36,7 @@ class ProteinSynthesisTest {
 
     @Test
     public void translateRNA() {
+
         ProteinSynthesis translator = new ProteinSynthesis();
 
         MyQueue rna = translator.transcribeDNA("ATGATCTCGTAA");
@@ -43,22 +44,30 @@ class ProteinSynthesisTest {
         String proteinStr = transformString(protein);
         assertEquals("MIS*", proteinStr);
 
-        MyQueue rna3 = translator.transcribeDNA("CCCCTGTCATAA");
-        MyQueue proteins3 = translator.translateRNA(rna3);
-        assertTrue(proteins3.isEmpty());
         MyQueue rna2 = translator.transcribeDNA("ATGCTATGT");
         MyQueue proteins2 = translator.translateRNA(rna2);
         String proteins2Str = transformString(proteins2);
         assertEquals("MLC", proteins2Str);
+
+        MyQueue rna3 = translator.transcribeDNA("CCCCTGTCATAA");
+        MyQueue proteins3 = translator.translateRNA(rna3);
+        assertTrue(proteins3.isEmpty());
+
+
         MyQueue rna4 = translator.transcribeDNA("ATGATCTCGTAAATC");
         System.out.println(transformString(translator.translateRNA(rna4)));
         rna4 = translator.transcribeDNA("ATGATCTCGTAGATC");
         System.out.println(transformString(translator.translateRNA(rna4)));
         rna4 = translator.transcribeDNA("ATGATCTCGTGAATC");
         System.out.println(transformString(translator.translateRNA(rna4)));
-        MyQueue rna5 = translator.transcribeDNA("UAAATGATCTCGTAA");
 
+        MyQueue rna5 = translator.transcribeDNA("UAAATGATCTCGTAA");
         assertEquals("MIS*", transformString(translator.translateRNA(rna5)));
+
+        System.out.println(transformString(translator.transcribeDNA("UAACAUGCGTAA")));
+        rna5 = translator.transcribeDNA("UAACAUGCGTAA");
+        protein = translator.translateRNA(rna5);
+        assertEquals("", transformString(protein));
 
     }
 }
