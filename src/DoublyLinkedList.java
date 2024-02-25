@@ -133,6 +133,8 @@ public class DoublyLinkedList<T> extends AbstractList<T> {
         // TODO: complete default constructor
         head = new Node(null);
         tail = new Node(null);
+        //head.setNext(tail);
+        //tail.setPrev(head);
 
     }
 

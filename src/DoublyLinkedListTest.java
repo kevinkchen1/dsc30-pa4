@@ -75,7 +75,7 @@ class DoublyLinkedListTest {
         doublyLinkedList.add(5);
         assertFalse(doublyLinkedList.isEmpty());
         doublyLinkedList.remove(0);
-        assertFalse(doublyLinkedList.isEmpty()); //
+        assertTrue(doublyLinkedList.isEmpty());
 
     }
 
